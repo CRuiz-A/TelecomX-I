@@ -1,10 +1,12 @@
-# 📊 Análisis de Evasión de Clientes (Churn) - TelecomX LATAM ✅ COMPLETADO
+# 📊 Análisis y Predicción de Evasión de Clientes (Churn) - TelecomX LATAM ✅ COMPLETADO
 
 ## 🎯 Descripción del Proyecto
 
-Este proyecto presenta un análisis exhaustivo de la evasión de clientes (churn) para la empresa TelecomX utilizando técnicas de ciencia de datos. El objetivo principal es identificar patrones, factores de riesgo y desarrollar estrategias de retención efectivas basadas en datos.
+Este proyecto presenta un análisis exhaustivo y la construcción de un modelo predictivo para la evasión de clientes (churn) en la empresa TelecomX. El objetivo se divide en dos fases:
+1.  **Análisis Exploratorio (Completado):** Identificar patrones, factores de riesgo y perfiles de clientes propensos a cancelar.
+2.  **Modelado Predictivo (Completado):** Desarrollar un pipeline de Machine Learning para predecir qué clientes tienen mayor probabilidad de cancelar sus servicios.
 
-**🏆 Estado: PROYECTO COMPLETADO** - Incluye informe final completo con análisis, conclusiones y recomendaciones estratégicas.
+**🏆 Estado: PROYECTO COMPLETADO** - Incluye análisis exploratorio, desarrollo de modelos predictivos y recomendaciones estratégicas.
 
 ## 📁 Estructura del Proyecto
 
@@ -12,7 +14,7 @@ Este proyecto presenta un análisis exhaustivo de la evasión de clientes (churn
 challenge2-data-science-LATAM/
 ├── TelecomX_Data.json          # Dataset principal con datos de clientes
 ├── TelecomX_diccionario.md     # Diccionario de datos con descripción de variables
-├── TelecomX.ipynb             # Notebook principal con análisis completo e informe final
+├── TelecomX.ipynb             # Notebook principal con análisis y modelado completo
 └── README.md                   # Documentación del proyecto
 ```
 
@@ -32,86 +34,57 @@ challenge2-data-science-LATAM/
 ## 🛠️ Tecnologías Utilizadas
 
 - **Python 3.x**
-- **Pandas** - Manipulación y análisis de datos
-- **NumPy** - Computación numérica
-- **Matplotlib** - Visualización de datos
-- **Seaborn** - Visualización estadística avanzada
+- **Pandas** & **NumPy** - Manipulación y análisis de datos
+- **Matplotlib** & **Seaborn** - Visualización de datos
+- **Scikit-learn** - Modelado de Machine Learning
 - **Jupyter Notebook** - Entorno de desarrollo interactivo
 
 ## 📋 Metodología Completada
 
-### 1. 📌 Extracción ✅
-- Carga de datos desde archivo JSON
-- Exploración inicial de la estructura del dataset
+### Parte 1: Análisis Exploratorio ✅
+- **Extracción y Transformación**: Carga, limpieza, normalización y codificación de datos.
+- **Análisis Exploratorio (EDA)**: Identificación de patrones, correlaciones y perfiles de riesgo mediante visualizaciones.
 
-### 2. 🔧 Transformación ✅
-- **Detección de inconsistencias**: Identificación de problemas en los datos
-- **Limpieza**: Corrección de tipos de datos, valores faltantes y duplicados
-- **Estandarización**: Normalización de valores categóricos
-- **Feature Engineering**: Creación de variable "Cuentas_Diarias"
-- **Encoding**: Transformación de variables categóricas a numéricas
-
-### 3. 📊 Análisis Exploratorio ✅
-- Análisis descriptivo de variables numéricas y categóricas
-- Visualización de distribuciones y patrones
-- Análisis de correlaciones y factores de riesgo
-- Identificación de perfiles de clientes en riesgo
-
-### 4. 📄 Informe Final ✅
-- **Introducción**: Contexto y objetivos del análisis
-- **Limpieza de datos**: Proceso y decisiones tomadas
-- **Análisis exploratorio**: Hallazgos principales con visualizaciones
-- **Conclusiones e insights**: Patrones identificados y su significado
-- **Recomendaciones**: Estrategias actionables para reducir churn
+### Parte 2: Modelado Predictivo de Churn ✅
+- **Preparación de Datos**: División en conjuntos de entrenamiento/prueba y escalado de características.
+- **Entrenamiento de Modelos**: Se entrenaron dos modelos de clasificación:
+    1.  `Regresión Logística` (como línea de base).
+    2.  `Random Forest Classifier` (modelo avanzado).
+- **Evaluación de Modelos**: Comparación usando métricas como Accuracy, Precision, Recall, F1-Score y ROC AUC.
+- **Interpretación**: Análisis de la importancia de las variables para entender los predictores clave del churn.
 
 ## 🔍 Principales Hallazgos
 
-### 📈 Métricas Clave
-- **Tasa de Churn Global**: 26.5% (1,869 de 7,043 clientes)
-- **Factor de Mayor Impacto**: Antigüedad del cliente (-0.35 correlación)
-- **Período Crítico**: Primeros 12 meses de antigüedad
-- **Factor Contractual**: Contratos largos reducen churn significativamente
+### Hallazgos del Análisis Exploratorio
+- **Tasa de Churn Global**: 26.5% (1,869 de 7,043 clientes).
+- **Período Crítico**: Los primeros 12 meses de antigüedad son los de mayor riesgo.
+- **Factores Contractuales**: Contratos anuales o de dos años reducen el churn drásticamente.
 
-### 🎯 Perfil de Cliente en Riesgo
-1. **Temporal**: Antigüedad menor a 12 meses
-2. **Contractual**: Contrato mes a mes
-3. **Financiero**: Cargos mensuales altos (>$70)
-4. **Método de Pago**: Cheque electrónico
-5. **Servicios**: Fibra óptica sin servicios adicionales
-6. **Demográfico**: Sin pareja ni dependientes
-
-### 🛡️ Factores Protectores
-- Contratos de 1-2 años (correlación -0.30)
-- Antigüedad > 24 meses
-- Métodos de pago automáticos
-- Múltiples servicios contratados
-- Servicios adicionales (seguridad, soporte técnico)
+### Resultados del Modelo Predictivo
+- **Mejor Modelo**: El **Random Forest Classifier** superó a la Regresión Logística con un **ROC AUC de 0.84**, demostrando una capacidad robusta para identificar clientes en riesgo.
+- **Principales Predictores de Churn**:
+    1.  **Permanencia (`tenure`)**: El factor más importante. A menor antigüedad, mayor probabilidad de churn.
+    2.  **Tipo de Contrato (`Contract_Month-to-month`)**: El predictor más fuerte después de la permanencia.
+    3.  **Cargos Mensuales (`Charges.Monthly`)**: Cargos más altos se asocian con más cancelaciones.
+    4.  **Servicio de Internet (`InternetService_Fiber optic`)**: Clientes con fibra óptica tienden a cancelar más, sugiriendo posibles problemas de precio o calidad.
 
 ## 🚀 Recomendaciones Estratégicas Implementadas
 
 ### 🎯 Retención Inmediata (Prioridad Alta)
-- **Programa de onboarding extendido** para nuevos clientes (0-6 meses)
-- **Sistema de alerta temprana** con scoring automático de riesgo
-- **Incentivos contractuales** para compromisos de largo plazo
-- **Automatización de pagos** con beneficios
+- **Programa de onboarding extendido** para nuevos clientes (0-6 meses).
+- **Sistema de alerta temprana** utilizando el modelo predictivo para identificar clientes con alto score de churn.
+- **Incentivos contractuales** para migrar clientes de contratos mes a mes a compromisos de largo plazo.
+- **Revisar la oferta de Fibra Óptica** para entender y mitigar las causas de la alta tasa de cancelación en este segmento.
 
 ### 📊 Segmentación y Mejoras
-- **Estrategia "Bundle Inteligente"** con paquetes personalizados
-- **Revisión del posicionamiento** de fibra óptica
-- **Capacidades analíticas avanzadas** con ML predictivo
-
-## 📊 Impacto Esperado de las Recomendaciones
-
-- **Reducción del churn**: Del 26.5% al 20% (estimado en 12 meses)
-- **Aumento del valor de vida del cliente**: 25-30%
-- **Mejora en retención de nuevos clientes**: Enfoque en primeros 12 meses
-- **Optimización de la base contractual**: Migración hacia contratos largos
+- **Estrategia "Bundle Inteligente"** con paquetes personalizados.
+- **Capacidades analíticas avanzadas** con el pipeline de ML implementado.
 
 ## 🚦 Cómo Ejecutar el Proyecto
 
 ### Prerrequisitos
 ```bash
-pip install pandas numpy matplotlib seaborn jupyter
+pip install pandas numpy matplotlib seaborn jupyter scikit-learn
 ```
 
 ### Ejecución
@@ -127,15 +100,15 @@ jupyter notebook TelecomX.ipynb
 ```
 
 ### Estructura del Notebook
-1. **📌 Extracción**: Carga y exploración inicial
-2. **🔧 Transformación**: Limpieza y preparación de datos
-3. **📊 Análisis**: Exploración y visualización detallada
-4. **📋 Informe Final**: Conclusiones, insights y recomendaciones completas
+1. **📌 Extracción y Limpieza**: Carga y preparación de datos.
+2. **📊 Análisis Exploratorio**: Visualización detallada de patrones.
+3. **🤖 Modelado y Predicción**: Pipeline de Machine Learning.
+4. **📋 Informe Final**: Conclusiones, insights y recomendaciones.
 
 ---
 
 ## 👨‍🎓 Nota del Estudiante
 
-Este proyecto representa un análisis completo de churn con enfoque práctico y aplicable. Cada recomendación está respaldada por datos reales y visualizaciones que facilitan la comprensión de los patrones identificados. El análisis demuestra como la ciencia de datos puede generar insights valiosos para la toma de decisiones empresariales.
+Este proyecto representa un ciclo completo de ciencia de datos, desde el análisis inicial hasta la implementación de un modelo predictivo. Cada recomendación está respaldada por datos y por los resultados del modelo, demostrando cómo la ciencia de datos puede generar insights valiosos y herramientas proactivas para la toma de decisiones empresariales.
 
 **Proyecto desarrollado como parte del desafío de Ciencia de Datos de Alura - LATAM**
